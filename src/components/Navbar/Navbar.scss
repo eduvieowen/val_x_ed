@@ -141,7 +141,8 @@
     justify-content: center;
     align-items: center;
 
-    background: var(--secondary-color-dark);
+    background: var(--altcolor-1);
+    cursor: pointer;
 
     svg {
         width: 25px;
@@ -178,7 +179,7 @@
         svg {
             width: 35px;
             height: 35px;
-            color: var(--secondary-color-dark);
+            color: var(--altcolor-3);
             margin: 0.5rem 1rem;
         }
 
@@ -316,6 +317,7 @@
         width: 25px;
         height: 25px;
         color: var(--white-color);
+        cursor: pointer;
     }
 
     div {
@@ -461,129 +463,6 @@
                 height: 0;
             }
         }
-        
-        // ul li:last-child a {
-        //     position: relative;
-        //     padding: 5px;
-
-        //     &::before,
-        //     &::after,
-        //     span::before,
-        //     span::after {
-        //         content: '';
-        //         position: absolute;
-        //         width: 8px;
-        //         height: 8px;
-        //         background: transparent;
-        //         transition: 1s;
-        //         /* -webkit-mix-blend-mode: hue; */
-        //     }
-
-        //     &::before {
-        //         top: -2px;
-        //         left: -2px;
-        //         border-top: 2px solid #ff0;
-        //         border-left: 2px solid #ff0;
-        //     }
-
-        //     &::after {
-        //         top: -2px;
-        //         right: -2px;
-        //         border-top: 2px solid #ff0;
-        //         border-right: 2px solid #ff0;
-        //     }
-
-        //     span::before {
-        //         bottom: -2px;
-        //         left: -2px;
-        //         border-bottom: 2px solid #ff0;
-        //         border-left: 2px solid #ff0;
-        //     }
-
-        //     span::after {
-        //         bottom: -2px;
-        //         right: -2px;
-        //         border-bottom: 2px solid #ff0;
-        //         border-right: 2px solid #ff0;
-        //     }
-
-
-        //     &:hover::before,
-        //     &:hover::after,
-        //     &:hover span::before,
-        //     &:hover span::after {
-        //         width: calc(180px / 2);
-        //         height: calc(50px / 2);
-        //     }
-        // }
-
-        // ul li:last-child a {
-        //     text-decoration: none;
-        //     position: relative;
-
-        //     &:hover {
-        //         color: linear-gradient(to right, #DA0C81, #F5AB35);
-        //     }
-
-        //     &:after {
-        //         content: "";
-        //         position: absolute;
-        //         bottom: -4px;
-        //         left: 0;
-        //         width: 100%;
-        //         height: 3px;
-        //         background: linear-gradient(to right, #DA0C81, #F5AB35);
-        //         transform: scaleX(0);
-        //         animation: scribble 3s ease-in-out forwards;
-        //         animation-iteration-count: infinite;
-        //     }
-
-        //     @keyframes scribble {
-        //         0% {
-        //             transform: scaleX(0);
-        //         }
-
-        //         50% {
-        //             transform: scaleX(1);
-        //         }
-
-        //         100% {
-        //             transform: scaleX(0);
-        //         }
-        //     }
-        // }
-
-        // ul li:last-child a {
-        //     position: relative;
-
-        //     &:after {
-        //       content: "❤️";
-        //       position: absolute;
-        //       top: 50%;
-        //       left: 50%;
-        //       transform: translate(-50%, -50%);
-        //       font-size: 2em;
-        //     //   color: #DA0C81;
-        //       opacity: 0;
-        //       animation: lovebeat 1s ease-in-out infinite alternate;
-        //     }
-
-        //     @keyframes lovebeat {
-        //       0% {
-        //         opacity: 0;
-        //         transform: translate(-50%, -50%) scale(1);
-        //       }
-        //       50% {
-        //         opacity: 1;
-        //         transform: translate(-50%, -50%) scale(1.2);
-        //       }
-        //       100% {
-        //         opacity: 0;
-        //         transform: translate(-50%, -50%) scale(1);
-        //       }
-        //     }
-        //   }
-
 
         @media screen and (min-width: 900px) {
             display: none;
@@ -598,5 +477,4 @@
 .css-j204z7-MuiFormControlLabel-root {
     margin-left: 0 !important;
     margin-right: 0 !important;
-    size: 2rem !important;
 }

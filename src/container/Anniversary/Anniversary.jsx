@@ -98,7 +98,7 @@ const AnniversaryPage = () => {
     };
 
     useEffect(() => {
-        const query = '*[_type == "anvpics"]';
+        const query = '*[_type == "anvpics"] | order(name asc)';
 
         client.fetch(query).then((data) => {
             setAnvpics(data);

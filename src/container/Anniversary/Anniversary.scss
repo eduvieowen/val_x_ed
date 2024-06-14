@@ -41,7 +41,7 @@
     }
 }
 
-.anniversary-page {
+#light .anniversary-page {
     flex: 1;
     flex-direction: column;
     width: 100%;
@@ -61,15 +61,112 @@
         overflow: hidden;
 
         /* Add this line */
-        video {
+        // video {
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     width: 100%;
+        //     height: 100%;
+        //     object-fit: cover;
+        //     z-index: -1;
+        // }
+
+        .music-video-button {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
+            bottom: 30px;
+            right: 60px;
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: var(--white-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--dark-color);
+                color: var(--white-color);
+            }
         }
+
+        .mute-all-button {
+            position: absolute;
+            bottom: 30px;
+            left: 60px;
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: var(--white-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--dark-color);
+                color: var(--white-color);
+            }
+        }
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: var(--altcolor-2);
+        background-color: rgba(255, 255, 255, 0.537);
+        padding: 0.5rem;
+        border-radius: 5px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: var(--altcolor-2);
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: var(--darkGray-color);
+        line-height: 1.6;
+    }
+
+    .gallery-section {
+        margin: 100px 0;
+    }
+
+    footer {
+        margin-top: 40px;
+        color: #777;
+    }
+}
+
+#dark .anniversary-page {
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        margin-top: -7vh;
+        background-image: url('../../assets/header-video.gif');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+
+        /* Add this line */
+        // video {
+        //     position: absolute;
+        //     top: 0;
+        //     left: 0;
+        //     width: 100%;
+        //     height: 100%;
+        //     object-fit: cover;
+        //     z-index: -1;
+        // }
 
         .music-video-button {
             position: absolute;
@@ -111,6 +208,9 @@
     h1 {
         font-size: 2.5rem;
         color: var(--secondary-color-dark);
+        background-color: rgba(255, 255, 255, 0.537);
+        padding: 0.5rem;
+        border-radius: 5px;
     }
 
     h2 {
@@ -126,7 +226,7 @@
     }
 
     .gallery-section {
-        margin: 40px 0;
+        margin: 100px 0;
     }
 
     footer {
@@ -138,11 +238,11 @@
 #light .app__anniversary-item {
     width: auto;
     min-height: auto;
-    background-color: var(--lightGray-color);
+    background-color: var(--primary-color);
 
     display: flex;
     flex-direction: row;
-    padding: 1rem;
+    padding: 2rem 0;
     margin-top: 2rem;
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
@@ -168,9 +268,7 @@
     
         div {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            // text-align: center;
         }
     
         p {
@@ -182,7 +280,7 @@
     
         h4 {
             font-weight: 600;
-            color: var(--secondary-color) !important;
+            color: var(--altcolor-1);
     
             margin-top: .5rem;
         }
@@ -283,7 +381,43 @@
     }
 }
 
-.app__anniversary-btns {
+#light .app__anniversary-btns {
+    flex-direction: row;
+    margin-top: 1rem;
+
+    div {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--white-color);
+
+        margin: 1rem;
+        transition: all 0.3s ease-in-out;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            color: var(--altcolor-1);
+        }
+
+        &:hover {
+            background-color: var(--altcolor-1);
+
+            svg {
+                color: var(--white-color);
+            }
+        }
+
+        @media screen and (max-width: 430px) {
+            width: 40px;
+            height: 40px;
+            margin: 0.7rem;
+        }
+    }
+}
+
+#dark .app__anniversary-btns {
     flex-direction: row;
     margin-top: 1rem;
 
@@ -304,10 +438,10 @@
         }
 
         &:hover {
-            background-color: var(--darkGray-color);
+            background-color: var(--secondary-color-dark);
 
             svg {
-                color: var(--white-color);
+                color: var(--dark-color);
             }
         }
 
