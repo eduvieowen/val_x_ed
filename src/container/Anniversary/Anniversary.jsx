@@ -8,6 +8,7 @@ import './Anniversary.scss';
 import { AppWrap, MotionWrap } from '../../wrapper';
 import { client, urlFor } from "../../client";
 import { dispFireworks } from '../../components';
+import { Login } from '../../components';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -43,20 +44,22 @@ const randomValue = values[randomIndex];
 
 if (randomValue === 1) {
     randomMusic = music1;
-} 
+}
 if (randomValue === 2) {
     randomMusic = music2;
 }
 
 const AnniversaryPage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [anvpics, setAnvpics] = useState([]);
 
-    const [inputValue, setInputValue] = useState('');
+    // const [inputValue, setInputValue] = useState('');
     const [displayDiv, setDisplayDiv] = useState(false);
-    const [showForm, setShowForm] = useState(true); // Track whether to show the form or not
-    const correctPhrase = 'June 12th'; // Change this to your desired correct phrase
+    // const [showForm, setShowForm] = useState(true); // Track whether to show the form or not
+    // const correctPhrase = 'process.env.REACT_APP_CORRECT_PHRASE'; // Change this to your desired correct phrase
 
     const [isMutedMusic, setIsMutedMusic] = useState(false);
     const [isMutedVideo, setIsMutedVideo] = useState(true);
@@ -99,18 +102,18 @@ const AnniversaryPage = () => {
         setCurrentIndex(index);
     };
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
+    // const handleInputChange = (event) => {
+    //     setInputValue(event.target.value);
+    // };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (inputValue === correctPhrase) {
-            setDisplayDiv(true);
-            setShowForm(false);
-            dispFireworks();
-        }
-    };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     if (inputValue === correctPhrase) {
+    //         setDisplayDiv(true);
+    //         setShowForm(false);
+    //         dispFireworks();
+    //     }
+    // };
 
     useEffect(() => {
         const query = '*[_type == "anvpics"]';
@@ -118,29 +121,25 @@ const AnniversaryPage = () => {
         client.fetch(query).then((data) => {
             setAnvpics(data);
         });
+         // Login
+        setDisplayDiv(isLoggedIn);
 
-    }, []);
+        if (isLoggedIn) {
+            dispFireworks();
+        }
+    }, [isLoggedIn]);
 
     const pic = anvpics[currentIndex];
 
+    
+    const handleLogin = (password) => {
+        setIsLoggedIn(true);
+    };
+    if (!isLoggedIn) {
+        return <Login onLogin={handleLogin} />;
+    }
     return (
         <div>
-            {showForm && (
-                <form onSubmit={handleSubmit} className="interactive-form">
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            value={inputValue}
-                            onChange={handleInputChange}
-                            placeholder="Enter the correct phrase 😘"
-                            className="form-input"
-                        />
-                    </div>
-                    <button type="submit" className="form-submit">
-                        Submit
-                    </button>
-                </form>
-            )}
             {displayDiv && (
                 <motion.div
                     initial={{ opacity: 0 }}
