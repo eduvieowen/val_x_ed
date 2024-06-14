@@ -7,18 +7,14 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import './Anniversary.scss';
 import { AppWrap, MotionWrap } from '../../wrapper';
 import { client, urlFor } from "../../client";
-import { dispFireworks } from '../../components';
-import { Login } from '../../components';
+import { Login, dispFireworks } from '../../components';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import music1 from '../../assets/music-1.mp3';
-import music2 from '../../assets/music-2.mp3';
-import gifAudio from '../../assets/gif-audio.mp3';
-// import headerVideo from '../../assets/header-video.mp4';
+import { audio } from '../../constants';
 
 const style = {
     position: 'absolute',
@@ -43,10 +39,10 @@ const randomIndex = Math.floor(Math.random() * values.length);
 const randomValue = values[randomIndex];
 
 if (randomValue === 1) {
-    randomMusic = music1;
+    randomMusic = audio.music1;
 }
 if (randomValue === 2) {
-    randomMusic = music2;
+    randomMusic = audio.music2;
 }
 
 const AnniversaryPage = () => {
@@ -54,18 +50,17 @@ const AnniversaryPage = () => {
 
     const [open, setOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [anvpics, setAnvpics] = useState([]);
-
-    // const [inputValue, setInputValue] = useState('');
     const [displayDiv, setDisplayDiv] = useState(false);
-    // const [showForm, setShowForm] = useState(true); // Track whether to show the form or not
-    // const correctPhrase = 'process.env.REACT_APP_CORRECT_PHRASE'; // Change this to your desired correct phrase
 
+    // media useStates
+    const [photos, setPhotos] = useState([]);
+    const [anvpics, setAnvpics] = useState([]);
+    const [isMutedGif, setIsMutedGif] = useState(true);
     const [isMutedMusic, setIsMutedMusic] = useState(false);
     const [isMutedVideo, setIsMutedVideo] = useState(true);
     const [mediaButton, setMediaButton] = useState('🔊 Music/ 🔇 Video');
-    const [isMutedGif, setIsMutedGif] = useState(true)
 
+    // media functions
     const handleMediaButton = () => {
         if (isMutedMusic && !isMutedVideo) {
             setMediaButton('🔊 Music/ 🔇 Video');
@@ -88,7 +83,6 @@ const AnniversaryPage = () => {
             handleMediaButton();
         };
     };
-
     const handleMute = () => {
         setIsMutedMusic(true);
         // setIsMutedVideo(true);
@@ -96,24 +90,12 @@ const AnniversaryPage = () => {
         setMediaButton('🔇 Music/ 🔇 Video');
     };
 
+    // anv pics
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handleClick = (index) => {
         setCurrentIndex(index);
     };
-
-    // const handleInputChange = (event) => {
-    //     setInputValue(event.target.value);
-    // };
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     if (inputValue === correctPhrase) {
-    //         setDisplayDiv(true);
-    //         setShowForm(false);
-    //         dispFireworks();
-    //     }
-    // };
 
     useEffect(() => {
         const query = '*[_type == "anvpics"]';
@@ -121,7 +103,7 @@ const AnniversaryPage = () => {
         client.fetch(query).then((data) => {
             setAnvpics(data);
         });
-         // Login
+        // Login
         setDisplayDiv(isLoggedIn);
 
         if (isLoggedIn) {
@@ -131,7 +113,7 @@ const AnniversaryPage = () => {
 
     const pic = anvpics[currentIndex];
 
-    
+
     const handleLogin = (password) => {
         setIsLoggedIn(true);
     };
@@ -148,19 +130,13 @@ const AnniversaryPage = () => {
                     className="anniversary-page"
                 >
                     <audio src={randomMusic} autoPlay loop muted={isMutedMusic} />
-                    <audio src={gifAudio} autoPlay loop muted={isMutedGif} />
+                    <audio src={audio.gifAudio} autoPlay loop muted={isMutedGif} />
 
                     {/* <header>
                         <h1>🎉Happy 1 Year Anniversary!🎉</h1>
                     </header> */}
 
                     <header>
-                        {/* <video
-                            src={headerVideo}
-                            autoPlay
-                            loop
-                            muted={isMutedVideo}
-                        /> */}
                         <button
                             className='music-video-button'
                             onClick={() => handleMedia()}
@@ -236,8 +212,8 @@ const AnniversaryPage = () => {
 
                     </section>
 
-                    <section className="gallery-section">
-                        <h2>Memorable Moments</h2>
+                    {/* <section className="gallery-section">
+                        <h2>Our Memorable Moments</h2>
 
                         {date.length && (
 
@@ -286,6 +262,43 @@ const AnniversaryPage = () => {
                                 </div>
                             </>
 
+                        )}
+                    </section> */}
+
+                    <section className="gallery-section">
+                        <h2>Our Memorable Moments</h2>
+
+                        {anvpics.length > 0 && (
+                            <>
+                                <div className='app__anniversary-item app__flex'>
+
+                                    <div className='app__anniversary-content'>
+
+                                        <h4 className='bold-text'>{pic?.name}</h4>
+                                        <div className='app__anniversary-btns'>
+                                            <div className='app__flex' onClick={() => handleClick(currentIndex === 0 ? anvpics.length - 1 : currentIndex - 1)}>
+                                                <HiChevronLeft />
+                                            </div>
+
+                                            <div className='app__flex' onClick={() => handleClick(currentIndex === anvpics.length - 1 ? 0 : currentIndex + 1)}>
+                                                <HiChevronRight />
+                                            </div>
+                                        </div>
+                                        <div className='app__anniversary-pics app__flex'>
+                                            <motion.div
+                                                whileInView={{ opacity: [0, 1] }}
+                                                transition={{ duration: 0.5, type: 'tween' }}
+                                            >
+                                                <img src={urlFor(pic?.imgUrl)} alt={pic?.name} />
+                                            </motion.div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </>
                         )}
                     </section>
 
