@@ -3,6 +3,7 @@ import confetti from "canvas-confetti";
 export { default as Navbar } from './Navbar/Navbar';
 export { default as NavigationDots } from './NavigationDots';
 export { default as Login } from './Login/Login';
+export { default as GooglePhotos } from './GooglePhotos';
 
 export const dispFireworks = () => {
     var duration = 3 * 1000;
